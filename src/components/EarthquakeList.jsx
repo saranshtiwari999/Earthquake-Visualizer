@@ -1,3 +1,4 @@
+// src/components/EarthquakeList.jsx
 import React from "react";
 
 export default function EarthquakeList({ earthquakes }) {
@@ -9,14 +10,18 @@ export default function EarthquakeList({ earthquakes }) {
             {earthquakes.map((eq) => (
                 <div
                     key={eq.id}
-                    className="p-3 rounded-lg border hover:shadow bg-gray-50 transition"
+                    className="p-3 rounded-lg border hover:shadow bg-gray-50 transition cursor-pointer"
+                    onClick={() => {
+                        // dispatch global event, MapController listens
+                        window.dispatchEvent(new CustomEvent("flyToMarker", { detail: eq.coords }));
+                    }}
                 >
                     <h2 className="font-semibold">{eq.place}</h2>
                     <p className="text-sm text-gray-600">
-                        Magnitude: <strong>{eq.magnitude}</strong>
+                        Magnitude: <strong>{eq.magnitude ?? "—"}</strong>
                     </p>
                     <p className="text-xs text-gray-500">
-                        {eq.time.toLocaleString()}
+                        {eq.time?.toLocaleString() ?? "—"}
                     </p>
                 </div>
             ))}
