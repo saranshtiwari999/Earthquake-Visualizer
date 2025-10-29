@@ -1,46 +1,47 @@
 import React from "react";
-import EarthquakeList from "./EarthquakeList";
-import TimeRangeSlider from "./TimeRangeSlider";
-import ToggleSwitch from "./ToggleSwitch";
+import EarthquakeList from "./EarthquakeList.jsx";
+import TimeRangeSlider from "./TimeRangeSlider.jsx";
+import ToggleSwitch from "./ToggleSwitch.jsx";
 
-const Sidebar = ({
-                     earthquakes,
-                     timeRange,
-                     setTimeRange,
-                     showHeatmap,
-                     setShowHeatmap,
-                     loading,
-                 }) => {
+export default function Sidebar({
+                                    earthquakes,
+                                    loading,
+                                    timeRange,
+                                    setTimeRange,
+                                    showHeatmap,
+                                    setShowHeatmap,
+                                    onSelectQuake,
+                                }) {
     return (
-        <div className="md:w-96 w-full h-screen bg-gradient-to-b from-blue-50 to-indigo-100 shadow-xl flex flex-col justify-between p-4 overflow-y-auto border-r border-gray-300">
+        <div className="md:w-96 w-full h-screen bg-gradient-to-b from-sky-50 via-indigo-50 to-blue-100 border-r border-indigo-200 shadow-xl flex flex-col justify-between p-6 overflow-y-auto">
             <div>
-                <h1 className="text-2xl font-bold text-blue-600 mb-2 flex items-center justify-between">
-                    🌎 Earthquake Visualizer
-                </h1>
-                <p className="text-sm text-gray-500 mb-4">Data: USGS (past day)</p>
+                <h1 className="text-2xl font-extrabold text-indigo-700 mb-1">🌎 Earthquake Visualizer</h1>
+                <p className="text-sm text-gray-600 mb-4">Data Source: USGS (past day)</p>
 
-                <div className="flex items-center justify-between mb-3">
-                    <label className="text-gray-700 font-medium">Show Heatmap</label>
+                <div className="flex items-center justify-between mb-4 bg-white/60 backdrop-blur-sm rounded-lg px-3 py-2 border border-indigo-100 shadow-sm">
+                    <span className="text-gray-700 font-medium">Heatmap</span>
                     <ToggleSwitch enabled={showHeatmap} setEnabled={setShowHeatmap} />
                 </div>
 
-                <TimeRangeSlider timeRange={timeRange} setTimeRange={setTimeRange} />
+                <div className="bg-white/60 backdrop-blur-sm p-3 rounded-xl border border-indigo-100 shadow-sm mb-4">
+                    <h2 className="text-lg font-semibold text-indigo-700 mb-2">Filter by Time</h2>
+                    <TimeRangeSlider timeRange={timeRange} setTimeRange={setTimeRange} />
+                </div>
 
-                <div className="mt-4">
-                    <h2 className="text-lg font-semibold mb-2">Recent Earthquakes</h2>
+                <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-indigo-100 shadow-md">
+                    <h2 className="text-lg font-semibold text-indigo-700 mb-3">Recent Earthquakes</h2>
                     {loading ? (
-                        <p className="text-gray-400">Loading...</p>
+                        <p className="text-gray-500 italic">Loading latest data...</p>
                     ) : (
-                        <EarthquakeList earthquakes={earthquakes} />
+                        <EarthquakeList earthquakes={earthquakes} onSelectQuake={onSelectQuake} />
                     )}
                 </div>
             </div>
 
-            <p className="text-xs text-center text-gray-400 mt-4">
-                © 2025 Earthquake Visualizer
-            </p>
+            <div className="mt-6 text-center text-xs text-gray-500">
+                <p>© 2025 <span className="font-semibold text-indigo-600">Earthquake Visualizer</span></p>
+                <p className="italic text-gray-400 mt-1">Built with React + Leaflet</p>
+            </div>
         </div>
     );
-};
-
-export default Sidebar;
+}
