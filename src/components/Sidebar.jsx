@@ -12,7 +12,7 @@ const Sidebar = ({
                      loading,
                  }) => {
     return (
-        <div className="md:w-96 w-full bg-white shadow-xl flex flex-col justify-between p-4 overflow-y-auto border-r border-gray-200">
+        <div className="md:w-96 w-full h-screen bg-gradient-to-b from-blue-50 to-indigo-100 shadow-xl flex flex-col justify-between p-4 overflow-y-auto border-r border-gray-300">
             <div>
                 <h1 className="text-2xl font-bold text-blue-600 mb-2 flex items-center justify-between">
                     🌎 Earthquake Visualizer
