@@ -41,8 +41,6 @@ export default function Navbar({
                         <option value="default">Default</option>
                         <option value="terrain">Terrain</option>
                         <option value="satellite">Satellite</option>
-                        <option value="grayscale">Grayscale</option>
-                        <option value="ocean">Ocean</option>
                     </select>
                 </div>
             </div>

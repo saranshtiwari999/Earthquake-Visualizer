@@ -15,9 +15,6 @@ export default function Sidebar({
     return (
         <div className="md:w-96 w-full h-screen bg-gradient-to-b from-sky-50 via-indigo-50 to-blue-100 border-r border-indigo-200 shadow-xl flex flex-col justify-between p-6 overflow-y-auto">
             <div>
-                <h1 className="text-2xl font-extrabold text-indigo-700 mb-1">🌎 Earthquake Visualizer</h1>
-                <p className="text-sm text-gray-600 mb-4">Data Source: USGS (past day)</p>
-
                 <div className="flex items-center justify-between mb-4 bg-white/60 backdrop-blur-sm rounded-lg px-3 py-2 border border-indigo-100 shadow-sm">
                     <span className="text-gray-700 font-medium">Heatmap</span>
                     <ToggleSwitch enabled={showHeatmap} setEnabled={setShowHeatmap} />
