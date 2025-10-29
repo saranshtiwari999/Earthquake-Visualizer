@@ -1,30 +1,28 @@
-// src/components/EarthquakeList.jsx
 import React from "react";
 
-export default function EarthquakeList({ earthquakes }) {
-    if (earthquakes.length === 0)
-        return <p className="text-gray-500">No earthquakes in this range.</p>;
+const EarthquakeList = ({ earthquakes }) => {
+    if (!earthquakes.length) return <p className="text-gray-400">No data found</p>;
 
     return (
-        <div className="grid gap-3 mt-3">
-            {earthquakes.map((eq) => (
+        <div className="space-y-3 max-h-[60vh] overflow-y-auto">
+            {earthquakes.map((quake) => (
                 <div
-                    key={eq.id}
-                    className="p-3 rounded-lg border hover:shadow bg-gray-50 transition cursor-pointer"
-                    onClick={() => {
-                        // dispatch global event, MapController listens
-                        window.dispatchEvent(new CustomEvent("flyToMarker", { detail: eq.coords }));
-                    }}
+                    key={quake.id}
+                    className="border rounded-lg p-3 hover:bg-gray-50 transition"
                 >
-                    <h2 className="font-semibold">{eq.place}</h2>
-                    <p className="text-sm text-gray-600">
-                        Magnitude: <strong>{eq.magnitude ?? "—"}</strong>
+                    <h3 className="font-semibold text-sm text-gray-800">
+                        {quake.properties.place}
+                    </h3>
+                    <p className="text-xs text-gray-600">
+                        Magnitude: {quake.properties.mag}
                     </p>
                     <p className="text-xs text-gray-500">
-                        {eq.time?.toLocaleString() ?? "—"}
+                        {new Date(quake.properties.time).toLocaleString()}
                     </p>
                 </div>
             ))}
         </div>
     );
-}
+};
+
+export default EarthquakeList;
