@@ -12,7 +12,7 @@ import "leaflet.heat";
  * - supports baseMap switching via baseMap prop
  */
 
-export default function EarthquakeMap({ earthquakes = [], showHeatmap = false, selectedQuake = null, baseMap = "default" }) {
+export default function EarthquakeMap({ earthquakes = [], showHeatmap = false, selectedQuake = null, baseMap = "default", showSidebar }) {
     const mapRef = useRef(null);
     const markersLayerRef = useRef(null);
     const heatLayerRef = useRef(null);
@@ -70,6 +70,17 @@ export default function EarthquakeMap({ earthquakes = [], showHeatmap = false, s
 
         L.tileLayer(url, { maxZoom: 18, attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
     }, [baseMap]);
+
+    // Invalidate map size when sidebar visibility changes
+    useEffect(() => {
+        const map = mapRef.current;
+        if (!map) return;
+
+        // Add a small delay to allow the sidebar animation to complete
+        setTimeout(() => {
+            map.invalidateSize({ animate: true });
+        }, 300); // 300ms delay
+    }, [showSidebar]);
 
     // update markers + heatmap whenever earthquake data or showHeatmap changes
     useEffect(() => {

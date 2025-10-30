@@ -61,6 +61,7 @@ export default function App() {
                             showHeatmap={showHeatmap}
                             selectedQuake={selectedQuake}
                             baseMap={baseMap}
+                            showSidebar={showSidebar}
                         />
                     </div>
                 ) : (
