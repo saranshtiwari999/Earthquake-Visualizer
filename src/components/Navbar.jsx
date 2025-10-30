@@ -18,7 +18,8 @@ export default function Navbar({
             </h1>
 
             <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2">
+                {/* Heatmap toggle - hidden on mobile (md breakpoint and up) */}
+                <div className="hidden md:flex items-center gap-2">
                     <span className="text-sm font-medium text-text">Heatmap</span>
                     <ToggleSwitch enabled={showHeatmap} setEnabled={setShowHeatmap} />
                 </div>
