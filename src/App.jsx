@@ -31,8 +31,6 @@ export default function App() {
                 projectName="🌎 Earthquake Visualizer"
                 showSidebar={showSidebar}
                 setShowSidebar={setShowSidebar}
-                showMap={showMap}
-                setShowMap={setShowMap}
                 baseMap={baseMap}
                 setBaseMap={setBaseMap}
             />
@@ -48,6 +46,10 @@ export default function App() {
                         setShowHeatmap={setShowHeatmap}
                         onSelectQuake={(feature) => {
                             setSelectedQuake(feature);
+                            // On mobile, hide sidebar when a quake is selected
+                            if (window.innerWidth < 768) {
+                                setShowSidebar(false);
+                            }
                         }}
                     />
                 )}

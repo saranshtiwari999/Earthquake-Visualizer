@@ -1,12 +1,10 @@
 import React from "react";
-import { LayoutPanelLeft, LayoutPanelTop, Map } from "lucide-react";
+import { LayoutPanelLeft } from "lucide-react";
 
 export default function Navbar({
                                    projectName,
                                    showSidebar,
                                    setShowSidebar,
-                                   showMap,
-                                   setShowMap,
                                    baseMap,
                                    setBaseMap,
                                }) {
@@ -27,18 +25,6 @@ export default function Navbar({
                     title="Toggle Sidebar"
                 >
                     <LayoutPanelLeft size={22} />
-                </button>
-
-                <button
-                    onClick={() => setShowMap(!showMap)}
-                    className={`p-2 rounded-xl shadow-sm transition-all ${
-                        showMap
-                            ? "bg-accent text-text"
-                            : "bg-sidebar hover:bg-hover text-accent"
-                    }`}
-                    title="Toggle Map"
-                >
-                    <LayoutPanelTop size={22} />
                 </button>
 
                 <select
