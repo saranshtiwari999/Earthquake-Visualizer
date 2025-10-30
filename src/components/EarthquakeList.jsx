@@ -11,7 +11,8 @@ export default function EarthquakeList({ earthquakes = [], onSelectQuake = () =>
     }
 
     return (
-        <div className="space-y-3 max-h-[60vh] overflow-y-auto">
+        // Replaced max-h-[60vh] with h-full to fill parent container
+        <div className="space-y-3 h-full overflow-y-auto">
             {earthquakes.map((f) => {
                 const id = f.id || f.properties?.code || Math.random().toString(36).slice(2, 9);
                 const place = f.properties?.place ?? "Unknown location";

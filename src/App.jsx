@@ -11,7 +11,6 @@ export default function App() {
     const [showHeatmap, setShowHeatmap] = useState(false);
     const [selectedQuake, setSelectedQuake] = useState(null); // feature or null
     const [showSidebar, setShowSidebar] = useState(true);
-    const [showMap, setShowMap] = useState(true);
     const [baseMap, setBaseMap] = useState("default");
 
     const loadData = useCallback(async (hours) => {
@@ -33,17 +32,17 @@ export default function App() {
                 setShowSidebar={setShowSidebar}
                 baseMap={baseMap}
                 setBaseMap={setBaseMap}
+                showHeatmap={showHeatmap}
+                setShowHeatmap={setShowHeatmap}
             />
 
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-1 min-h-0">
                 {showSidebar && (
                     <Sidebar
                         earthquakes={earthquakes}
                         loading={loading}
                         timeRange={timeRange}
                         setTimeRange={setTimeRange}
-                        showHeatmap={showHeatmap}
-                        setShowHeatmap={setShowHeatmap}
                         onSelectQuake={(feature) => {
                             setSelectedQuake(feature);
                             // On mobile, hide sidebar when a quake is selected
@@ -54,21 +53,19 @@ export default function App() {
                     />
                 )}
 
-                {showMap ? (
-                    <div className="flex-1 relative">
-                        <EarthquakeMap
-                            earthquakes={earthquakes}
-                            showHeatmap={showHeatmap}
-                            selectedQuake={selectedQuake}
-                            baseMap={baseMap}
-                            showSidebar={showSidebar}
-                        />
-                    </div>
-                ) : (
-                    <div className="flex-1 flex items-center justify-center text-gray-500">
-                        Map is hidden — toggle it from the navbar.
-                    </div>
-                )}
+                <div className="flex-1 relative">
+                    <EarthquakeMap
+                        earthquakes={earthquakes}
+                        showHeatmap={showHeatmap}
+                        selectedQuake={selectedQuake}
+                        baseMap={baseMap}
+                        showSidebar={showSidebar}
+                    />
+                    {/* Moved copyright to bottom-left */}
+                    {/*<div className="absolute bottom-3 left-3 text-xs text-gray-500 z-[1000] bg-white/70 px-2 py-1 rounded">*/}
+                    {/*    © 2025 Earthquake Visualizer*/}
+                    {/*</div>*/}
+                </div>
             </div>
         </div>
     );
